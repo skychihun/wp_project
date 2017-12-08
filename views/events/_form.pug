@@ -1,0 +1,59 @@
+.row
+  .col.col-xs-6
+    .form-group
+      label(for="title") Title
+      input.form-control(type="text", name="title", placeholder="What is your event?", value=event.title)
+    .form-group
+      label(for="place") Place
+      input.form-control(type="text", name="place", placeholder="Where your event be occured?", value=event.place)
+    .col.col-xs-6
+      .form-group.row
+        label(for="type") Type
+        select.form-control(type="select", name="type")
+          if types
+            each type in types
+              option(value=type.id) #{type.name}
+    .col.col-xs-6
+      .form-group.row
+        label(for="class") Class
+        select.form-control(type="select", name="class")
+          if classes
+            each classObj in classes
+              option(value=classObj.id) #{classObj.name}
+    .form-group
+      label(for="start_date") Start date
+      input.form-control(type="date", name="start_date", placeholder="When your event starts?", value=moment(event.start_date).format('YYYY-MM-DD'))
+    .form-group
+      label(for="end_date") End date
+      input.form-control(type="date", name="end_date", placeholder="When your event ends?", value=moment(event.end_date).format('YYYY-MM-DD'))
+    .form-group
+      label(for="price") Price
+      input.form-control(type="date", name="price", placeholder="When your event's price?(type 0 if free)'", value=event.price)
+    .form-group
+      label(for="max_user") Max user
+      input.form-control(type="date", name="max_user", placeholder="When your event's max_user?(default is 10)'", value=event.max_user)
+  .col.col-xs-6
+    .form-group
+      label(for="group_name") Group name
+      input.form-control(type="text", name="group_name", placeholder="What is your group's name?", value=event.group_name)
+    .form-group
+      label(for="group_desc") Group description
+      textarea.form-control(name="group_desc", rows="3", placeholder="Tell me about your group.")= event.group_desc
+    .form-group
+      label(for="content") Content
+      textarea.form-control(name="content", rows="5", placeholder="Tell me about your event.")= event.content
+    .form-group
+      label(for="images") images
+      input.form-control-file(name="images", type="file", multiple="")
+//- .form-group
+//-   label(for="type") Event
+//-   select.form-control(type="select", name="type")
+//-     if types
+//-       each type in types
+//-         option(value=type.id) #{type.name}
+//- .form-group
+//-   label(for="class") Event
+//-   select.form-control(type="select", name="class")
+//-     if classes
+//-       each class in classes
+//-         option(value=class.id) #{class.name}

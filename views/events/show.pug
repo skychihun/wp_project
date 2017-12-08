@@ -1,0 +1,87 @@
+extends ../layout
+
+block extrastyle
+  link(rel='stylesheet', href='/stylesheets/event/show.css')
+block extrascript
+  script(src='/javascripts/event/show.js')
+block content
+  .container
+    h1.main-title= event.title
+    .row
+      .col.col-4
+        .thumb-viewer
+          each image in event.images
+            img.img-thumbnail(src=`data:image/jpeg;base64,${image.data.toString('base64')}`)
+      .col.col-8
+        table.table
+          thead
+            tr
+              th(scope='col') 항목
+              th(scope='col') 내용
+          tbody
+            tr
+              th(scope='row') 주최자
+              td=event.author ? event.author.name : ''
+            tr
+              th(scope='row') 장소
+              td=event.place
+            tr
+              th(scope='row') 종류
+              td=typeName ? typeName : ''
+            tr
+              th(scope='row') 분야
+              td=className ? className : ''
+            tr
+              th(scope='row') 시작일
+              td=moment(event.start_date).format('YYYY-MM-DD')
+            tr
+              th(scope='row') 종료일
+              td=moment(event.end_date).format('YYYY-MM-DD')
+            tr
+              th(scope='row') 내용
+              td=event.content
+            tr
+              th(scope='row') 단체명
+              td=event.group_name
+            tr
+              th(scope='row') 단체 설명
+              td=event.group_desc
+            tr
+              th(scope='row') 참가비
+              td=(event.price ? event.price+'원' : '무료')
+            tr
+              th(scope='row') 정원
+              td=event.max_user
+            if (currentUser && event.author) && event.author.id == currentUser.id
+              tr
+                th(scope='row') 참여 신청자
+                td
+                  h4
+                    if guests
+                      each guest in guests
+                        if guest
+                          span.badge.badge-secondary.guest=guest.name
+
+
+        
+    .row
+      .col
+      .buttons
+        form(action=`/events/${event.id}/apply`, method="POST")
+          - var isGuest = false;
+          for guest in guests
+            if (currentUser && guest) && currentUser.id == guest.id
+              - isGuest = true;
+          if !isGuest
+            button.btn.btn-primary.btn-apply #[i.fa.fa-pencil-square-o] 신청하기
+          else
+            button.btn.btn-success.btn-apply #[i.fa.fa-check] 신청완료
+          a(href=`/events/`) 
+            button.btn(type='button') 목록
+          if (currentUser && event.author) && event.author.id == currentUser.id
+            a(href=`/events/${event.id}/edit`)
+              button.btn.btn-secondary(type='button') 편집
+            a(href=`/events/${event.id}?_method=delete`)
+              button.btn.btn-danger.need-confirm-btn(type='button') 삭제
+        
+          

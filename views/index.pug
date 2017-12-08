@@ -1,0 +1,25 @@
+extends layout
+
+block hero-unit
+  .jumbotron
+    .Search.text-center.view-only-large
+      .card-body
+      h3.card-title Find your next experience
+      form(action='/events/', method='GET')
+        .col.col-12
+          .row
+            .col.col-2.row
+            .form-group.col.col-3.row
+              input.form-control(type='text', name='title', placeholder='Event Name')
+            .form-group.col.col-3.row
+              input.form-control(type='text', name='place', placeholder='Event Place')
+            .form-group.col.col-2.row
+              select.form-control(name='className')
+                option(value="")="선택"
+                each c in classes
+                  option(value=c.name)=c.name
+            .form-group.col.col-2
+              button.btn.btn-block.btn-primary(href='#') Search
+      
+block content
+  

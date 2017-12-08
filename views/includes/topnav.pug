@@ -1,0 +1,25 @@
+.header.clearfix
+  nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+    .container
+      a.navbar-brand(href="/") EVENT BRITE
+      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarsExampleDefault", aria-controls="navbarsExampleDefault", aria-expanded="false", aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+
+      #navbarsExampleDefault.collapse.navbar-collapse
+        ul.navbar-nav.ml-auto
+          li.nav-item
+            a.nav-link(href="/events") BROWSE EVENTS
+          li.nav-item
+            a.nav-link(href="/users") USERS
+          if (!currentUser) 
+            li.nav-item
+              a.nav-link(href='/signin') SIGNIN
+            li.nav-item
+              a.nav-link(href='/users/new') SIGNUP
+          else
+            li.nav-item
+              a.nav-link(href=`/users/${currentUser._id}`) My Profile
+            li.nav-item
+              a.nav-link(href='/signout') Signout
+        
+          

@@ -1,0 +1,5 @@
+p.card-text= event.content
+.row
+  .col-sm
+    span
+      | #{moment(event.start_date).format('YYYY-MM-DD')} ~ #{moment(event.end_date).format('YYYY-MM-DD')}

@@ -1,0 +1,10 @@
+.thumb-viewer img{
+  cursor: pointer;
+}
+.btn-apply{
+  cursor: pointer;
+}
+span.guest{
+  margin-right: 5px;
+  float: left;
+}

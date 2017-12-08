@@ -1,0 +1,46 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    .card
+      form(action='/events/', method='GET')
+        .col.col-12
+          .row
+            .col.col-2.row
+            .form-group.col.col-3.row
+              input.form-control(type='text', name='title', placeholder='Event Name', value=`${query.title ? query.title : ''}`)
+            .form-group.col.col-3.row
+              input.form-control(type='text', name='place', placeholder='Event Place', value=`${query.place ? query.place : ''}`)
+            .form-group.col.col-2.row
+              select.form-control(name='className')
+                option(value="")="선택"
+                each c in classes
+                  if query.className && query.className == c.name
+                    option(value=c.name, selected='')=c.name
+                  else
+                    option(value=c.name)=c.name
+            .form-group.col.col-2
+              button.btn.btn-block.btn-primary(href='#') Search
+
+    h1.main-title 
+      | Events
+      if events.total > 0
+        .small Total #{events.total} event(s)
+
+    if events.total <= 0 
+      .alert.alert-info No events available yet
+    else
+      .events
+        each event in events.docs
+          a(href=`/events/${event.id}`)
+            .event.card
+              .card-block
+                h3.card-title= event.title
+              include _event
+
+      +paginate(events, '/events', {query: "???XXX&&"})
+
+    hr
+    a.btn.btn-primary(href='/events/new') Make Event
