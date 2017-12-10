@@ -28,10 +28,10 @@
       input.form-control(type="date", name="end_date", placeholder="When your event ends?", value=moment(event.end_date).format('YYYY-MM-DD'))
     .form-group
       label(for="price") Price
-      input.form-control(type="date", name="price", placeholder="When your event's price?(type 0 if free)'", value=event.price)
+      input.form-control(type="num", name="price", placeholder="When your event's price?(type 0 if free)'", value=event.price)
     .form-group
       label(for="max_user") Max user
-      input.form-control(type="date", name="max_user", placeholder="When your event's max_user?(default is 10)'", value=event.max_user)
+      input.form-control(type="num", name="max_user", placeholder="When your event's max_user?(default is 10)'", value=event.max_user)
   .col.col-xs-6
     .form-group
       label(for="group_name") Group name
